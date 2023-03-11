@@ -1,4 +1,4 @@
-# mobilegameserver
+# mobile game server
 
 This project is a Java Spring-based application designed to provide a backend infrastructure for a mobile game. 
 The application currently allows users to create or retrieve players based on an authentication token and add characters to the plater. 
