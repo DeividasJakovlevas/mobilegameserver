@@ -15,6 +15,5 @@ public interface HeroService {
     Hero createHero(Hero hero);
 
     Hero updateHero(Long id, Hero hero);
-
-    void deleteHero(Long id);
+    
 }

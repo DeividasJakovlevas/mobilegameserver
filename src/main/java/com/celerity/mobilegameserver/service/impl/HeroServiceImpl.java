@@ -34,9 +34,7 @@ public class HeroServiceImpl implements HeroService {
     public Hero createHero(Hero hero) {
         return heroRepository.save(hero);
     }
-    public Hero createStartingHeroes(Hero hero) {
-        return heroRepository.save(hero);
-    }
+
     public Hero updateHero(Long id, Hero hero) {
         Optional<Hero> optionalHero = heroRepository.findById(id);
 
@@ -45,16 +43,6 @@ public class HeroServiceImpl implements HeroService {
             existingHero.setLevel(hero.getLevel());
             existingHero.setStars(hero.getStars());
             return heroRepository.save(existingHero);
-        } else {
-            throw new ResourceNotFoundException("Hero","id", id.toString());
-        }
-    }
-
-    public void deleteHero(Long id) {
-        Optional<Hero> optionalHero = heroRepository.findById(id);
-
-        if (optionalHero.isPresent()) {
-            heroRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Hero","id", id.toString());
         }

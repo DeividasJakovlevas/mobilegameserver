@@ -21,11 +21,10 @@ public class Player {
     private String token;
     @OneToMany(mappedBy = "player", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Hero> heroes = new ArrayList<>();
-    @ElementCollection
-    @CollectionTable(name = "player_items", joinColumns = @JoinColumn(name = "player_id"))
-    @MapKeyJoinColumn(name = "item_id")
-    @Column(name = "quantity")
-    private Map<Item, Integer> items = new HashMap<>();
+
+    @Column(name = "items")
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 
     public Player(){ }
 
@@ -33,7 +32,7 @@ public class Player {
         this.token = token;
     }
 
-    public Player(String name, String token, List<Hero> heroes, Map<Item, Integer> items) {
+    public Player(String name, String token, List<Hero> heroes, List<Item> items) {
         this.name = name;
         this.token = token;
         this.heroes = heroes;
@@ -66,7 +65,7 @@ public class Player {
         this.token = token;
     }
 
-    public Map<Item, Integer> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 

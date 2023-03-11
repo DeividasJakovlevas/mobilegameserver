@@ -19,12 +19,6 @@ public class PlayerServiceImpl implements PlayerService {
         this.playerRepository = playerRepository;
     }
 
-
-    @Override
-    public Player createPlayer(Player player) {
-        return playerRepository.save(player);
-    }
-
     @Override
     public Player getOrCreatePlayer(String token) {
         Optional<Player> optionalPlayer = playerRepository.findAll().
@@ -80,26 +74,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void deletePlayer(long id) {
-        playerRepository.deleteById(id);
-    }
-
-    @Override
     public void addHeroToPlayer(long playerId, Hero hero) {
         Player player = getPlayerById(playerId);
         if (player != null) {
             player.getHeroes().add(hero);
             hero.setPlayer(player);
-            playerRepository.save(player);
-        }
-    }
-
-    @Override
-    public void removeHeroFromPlayer(long playerId, Hero hero) {
-        Player player = getPlayerById(playerId);
-        if (player != null) {
-            player.getHeroes().remove(hero);
-            hero.setPlayer(null);
             playerRepository.save(player);
         }
     }
