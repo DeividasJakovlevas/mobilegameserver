@@ -3,7 +3,9 @@ package com.celerity.mobilegameserver.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Entity
@@ -17,25 +19,25 @@ public class Player {
     private String name;
     @Column(name = "token")
     private String token;
-    @Column(name = "gold")
-    private long gold;
-    @Column(name = "gems")
-    private int gems;
     @OneToMany(mappedBy = "player", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Hero> heroes = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "player_items", joinColumns = @JoinColumn(name = "player_id"))
+    @MapKeyJoinColumn(name = "item_id")
+    @Column(name = "quantity")
+    private Map<Item, Integer> items = new HashMap<>();
 
     public Player(){ }
+
     public Player(String token){
-        this.gold = 200;
         this.token = token;
     }
 
-    public Player(String name, String token, long gold, int gems, List<Hero> heroes) {
+    public Player(String name, String token, List<Hero> heroes, Map<Item, Integer> items) {
         this.name = name;
-        this.gold = gold;
-        this.gems = gems;
         this.token = token;
         this.heroes = heroes;
+        this.items = items;
     }
 
     public long getId() {
@@ -50,29 +52,11 @@ public class Player {
         this.name = name;
     }
 
-    public long getGold() {
-        return gold;
-    }
-
-    public void setGold(long gold) {
-        this.gold = gold;
-    }
-
-    public int getGems() {
-        return gems;
-    }
-
-    public void setGems(int gems) {
-        this.gems = gems;
-    }
-
     public List<Hero> getHeroes() {
         return heroes;
     }
 
-    public void setHeroes(List<Hero> heroes) {
-        this.heroes = heroes;
-    }
+    public void setHeroes(List<Hero> heroes) { this.heroes = heroes; }
 
     public String getToken() {
         return token;
@@ -80,6 +64,10 @@ public class Player {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Map<Item, Integer> getItems() {
+        return items;
     }
 
 }

@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ class PlayerServiceImplTest {
     @Test
     void createPlayer() {
         // given
-        Player player = new Player("Test","test_token", 1000, 10, new ArrayList<>());
+        Player player = new Player("Test","test_token", new ArrayList<>(), new HashMap<>());
         when(playerRepository.save(any())).thenReturn(player);
 
         // when
@@ -42,15 +43,14 @@ class PlayerServiceImplTest {
         // then
         assertNotNull(createdPlayer);
         assertEquals(player.getName(), createdPlayer.getName());
-        assertEquals(player.getGold(), createdPlayer.getGold());
-        assertEquals(player.getGems(), createdPlayer.getGems());
+        assertEquals(player.getItems(), createdPlayer.getItems());
         assertEquals(player.getHeroes(), createdPlayer.getHeroes());
     }
 
     @Test
     void updatePlayer() {
         // given
-        Player player = new Player("Test","test_token", 1000, 10, new ArrayList<>());
+        Player player = new Player("Test","test_token", new ArrayList<>(), new HashMap<>());
         when(playerRepository.save(any())).thenReturn(player);
 
         // when
@@ -59,15 +59,14 @@ class PlayerServiceImplTest {
         // then
         assertNotNull(updatedPlayer);
         assertEquals(player.getName(), updatedPlayer.getName());
-        assertEquals(player.getGold(), updatedPlayer.getGold());
-        assertEquals(player.getGems(), updatedPlayer.getGems());
+        assertEquals(player.getItems(), updatedPlayer.getItems());
         assertEquals(player.getHeroes(), updatedPlayer.getHeroes());
     }
 
     @Test
     void getPlayerById() {
         // given
-        Player player = new Player("Test","test_token", 1000, 10, new ArrayList<>());
+        Player player = new Player("Test","test_token", new ArrayList<>(), new HashMap<>());
         when(playerRepository.findById(1L)).thenReturn(Optional.of(player));
 
         // when
@@ -76,8 +75,7 @@ class PlayerServiceImplTest {
         // then
         assertNotNull(foundPlayer);
         assertEquals(player.getName(), foundPlayer.getName());
-        assertEquals(player.getGold(), foundPlayer.getGold());
-        assertEquals(player.getGems(), foundPlayer.getGems());
+        assertEquals(player.getItems(), foundPlayer.getItems());
         assertEquals(player.getHeroes(), foundPlayer.getHeroes());
     }
 
@@ -85,8 +83,8 @@ class PlayerServiceImplTest {
     void getAllPlayers() {
         // given
         List<Player> players = new ArrayList<>();
-        Player player1 = new Player("Test","test_token", 1000, 10, new ArrayList<>());
-        Player player2 = new Player("Test2","test_token", 500, 5, new ArrayList<>());
+        Player player1 = new Player("Test","test_token", new ArrayList<>(), new HashMap<>());
+        Player player2 = new Player("Test2","test_token", new ArrayList<>(), new HashMap<>());
         players.add(player1);
         players.add(player2);
         when(playerRepository.findAll()).thenReturn(players);
