@@ -23,8 +23,12 @@ public class Player {
     private List<Hero> heroes = new ArrayList<>();
 
     @Column(name = "items")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "guild_id")
+    private Guild guild;
 
     public Player(){ }
 

@@ -3,7 +3,7 @@ package com.celerity.mobilegameserver.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +12,7 @@ public class Item {
     private int amount;
     @Column(name = "item_type_id")
     private int typeId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "player_id")
     private Player player;
 }
