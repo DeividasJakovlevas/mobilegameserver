@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "heroes")
-public class Hero {
+@Table(name = "units")
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,9 @@ public class Hero {
     @Column(name = "max_hp")
     private float hp;
 
-    public Hero() { }
+    public Unit() { }
 
-    public Hero(CharacterType type) {
+    public Unit(CharacterType type) {
         this.level = 1;
         this.stars = 0;
         this.typeId = type.getTypeId();
@@ -41,7 +41,7 @@ public class Hero {
         this.hp = type.getHp();
     }
 
-    public Hero(Player player, int level, byte stars, float damage, float hp) {
+    public Unit(Player player, int level, byte stars, float damage, float hp) {
         this.player = player;
         this.level = level;
         this.stars = stars;

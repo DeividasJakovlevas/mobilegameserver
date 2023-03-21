@@ -27,16 +27,13 @@ class GuildRepositoryTest {
 
     @Test
     void findByOwner_Token() {
-        // Arrange
         String token = "token";
         Player owner = new Player(token);
         Guild guild = new Guild("My Guild", owner);
-        when(guildRepository.findByOwner_Token(token)).thenReturn(Optional.of(guild));
+        when(guildRepository.findByOwnerToken(token)).thenReturn(Optional.of(guild));
 
-        // Act
-        Optional<Guild> foundGuild = guildRepository.findByOwner_Token(token);
+        Optional<Guild> foundGuild = guildRepository.findByOwnerToken(token);
 
-        // Assert
         assertTrue(foundGuild.isPresent());
         assertEquals(guild, foundGuild.get());
     }

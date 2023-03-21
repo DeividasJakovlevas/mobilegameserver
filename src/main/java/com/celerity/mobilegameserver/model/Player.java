@@ -3,9 +3,7 @@ package com.celerity.mobilegameserver.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Entity
@@ -20,7 +18,7 @@ public class Player {
     @Column(name = "token")
     private String token;
     @OneToMany(mappedBy = "player", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    private List<Hero> heroes = new ArrayList<>();
+    private List<Unit> units = new ArrayList<>();
 
     @Column(name = "items")
     @OneToMany(cascade = CascadeType.ALL)
@@ -36,10 +34,10 @@ public class Player {
         this.token = token;
     }
 
-    public Player(String name, String token, List<Hero> heroes, List<Item> items) {
+    public Player(String name, String token, List<Unit> units, List<Item> items) {
         this.name = name;
         this.token = token;
-        this.heroes = heroes;
+        this.units = units;
         this.items = items;
     }
 
@@ -55,11 +53,11 @@ public class Player {
         this.name = name;
     }
 
-    public List<Hero> getHeroes() {
-        return heroes;
+    public List<Unit> getUnits() {
+        return units;
     }
 
-    public void setHeroes(List<Hero> heroes) { this.heroes = heroes; }
+    public void setUnits(List<Unit> units) { this.units = units; }
 
     public String getToken() {
         return token;

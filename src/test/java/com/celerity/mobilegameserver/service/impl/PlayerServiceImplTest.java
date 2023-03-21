@@ -39,7 +39,7 @@ class PlayerServiceImplTest {
         assertNotNull(updatedPlayer);
         assertEquals(player.getName(), updatedPlayer.getName());
         assertEquals(player.getItems(), updatedPlayer.getItems());
-        assertEquals(player.getHeroes(), updatedPlayer.getHeroes());
+        assertEquals(player.getUnits(), updatedPlayer.getUnits());
     }
     @Test
     public void testGetOrCreatePlayerWithExistingToken() {
@@ -64,7 +64,7 @@ class PlayerServiceImplTest {
         Player result = playerService.getOrCreatePlayer(token);
 
         assertEquals(token, result.getToken());
-        assertEquals(3, result.getHeroes().size());
+        assertEquals(3, result.getUnits().size());
         verify(playerRepository, times(1)).save(any());
     }
 
@@ -78,7 +78,7 @@ class PlayerServiceImplTest {
         assertNotNull(foundPlayer);
         assertEquals(player.getName(), foundPlayer.getName());
         assertEquals(player.getItems(), foundPlayer.getItems());
-        assertEquals(player.getHeroes(), foundPlayer.getHeroes());
+        assertEquals(player.getUnits(), foundPlayer.getUnits());
     }
 
     @Test

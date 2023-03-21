@@ -24,7 +24,7 @@ public class Guild {
     private List<Player> players;
 
     @OneToOne
-    @Column(name = "owner_id")
+    @PrimaryKeyJoinColumn(name = "owner_id")
     private Player owner;
 
     public Guild() {

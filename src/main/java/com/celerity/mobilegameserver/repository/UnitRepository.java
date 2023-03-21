@@ -1,7 +1,7 @@
 package com.celerity.mobilegameserver.repository;
 
-import com.celerity.mobilegameserver.model.Hero;
+import com.celerity.mobilegameserver.model.Unit;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HeroRepository extends JpaRepository<Hero,Long> {
+public interface UnitRepository extends JpaRepository<Unit,Long> {
 }

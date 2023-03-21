@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface GuildRepository extends JpaRepository<Guild,Long> {
     Optional<Guild> findByName(String name);
-    Optional<Guild> findByOwner_Token(String token);
+    Optional<Guild> findByOwnerToken(String token);
 }

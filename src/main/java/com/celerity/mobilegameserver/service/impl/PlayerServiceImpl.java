@@ -1,7 +1,7 @@
 package com.celerity.mobilegameserver.service.impl;
 
 import com.celerity.mobilegameserver.model.CharacterType;
-import com.celerity.mobilegameserver.model.Hero;
+import com.celerity.mobilegameserver.model.Unit;
 import com.celerity.mobilegameserver.model.Player;
 import com.celerity.mobilegameserver.repository.PlayerRepository;
 import com.celerity.mobilegameserver.service.PlayerService;
@@ -30,18 +30,18 @@ public class PlayerServiceImpl implements PlayerService {
         if(optionalPlayer.isEmpty()){
             player = new Player(token);
 
-            Hero meleeWarrior = new Hero(CharacterType.HERO_MELEE_WARRIOR);
+            Unit meleeWarrior = new Unit(CharacterType.UNIT_MELEE_WARRIOR);
             meleeWarrior.setPlayer(player);
 
-            Hero rangedHealer = new Hero(CharacterType.HERO_RANGED_HEALER);
+            Unit rangedHealer = new Unit(CharacterType.UNIT_RANGED_HEALER);
             rangedHealer.setPlayer(player);
 
-            Hero rangedArcher = new Hero(CharacterType.HERO_RANGED_ARCHER);
+            Unit rangedArcher = new Unit(CharacterType.UNIT_RANGED_ARCHER);
             rangedArcher.setPlayer(player);
 
-            player.getHeroes().add(meleeWarrior);
-            player.getHeroes().add(rangedHealer);
-            player.getHeroes().add(rangedArcher);
+            player.getUnits().add(meleeWarrior);
+            player.getUnits().add(rangedHealer);
+            player.getUnits().add(rangedArcher);
 
             playerRepository.save(player);
         }
@@ -74,11 +74,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void addHeroToPlayer(long playerId, Hero hero) {
+    public void addUnitToPlayer(long playerId, Unit unit) {
         Player player = getPlayerById(playerId);
         if (player != null) {
-            player.getHeroes().add(hero);
-            hero.setPlayer(player);
+            player.getUnits().add(unit);
+            unit.setPlayer(player);
             playerRepository.save(player);
         }
     }
